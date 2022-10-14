@@ -1,26 +1,29 @@
-def arithmetic_arranger(a):
-    a = a.replace(" ", "")
+def arithmetic_arranger(self):
 
+    for i in self:
 
+        i = i.replace(" ", "")
 
-    if "+" in a:
-        n = a.index("+")
-        num1 = int(a[0:n])
-        num2 = int(a[n + 1:])
-        result = num1 + num2
+        if "+" in i:
+            n = i.index("+")
+            num1 = int(i[0:n])
+            num2 = int(i[n + 1:])
+            result = num1 + num2
 
-        print(' ', num1, '\n', '+', num2, '\n______\n ', num1 + num2, sep='')
+            print(' ', num1, '\n', '+', num2, '\n______\n ', num1 + num2, "\n", sep='')
 
-        return " "
+            # return " "
 
-    elif "-" in a:
-        n = a.index("-")
-        num1 = int(a[0:n])
-        num2 = int(a[n + 1:])
-        print(' ', num1, '\n', '-', num2, '\n______\n ', num1 - num2, sep='')
-        return " "
+        elif "-" in i:
+            n = i.index("-")
+            num1 = int(i[0:n])
+            num2 = int(i[n + 1:])
+            print(' ', num1, '\n', '-', num2, '\n______\n ', num1 - num2, "\n", sep='')
+            # return " "
 
-formula = arithmetic_arranger("1500 +50")
+    return " "
+
+formula = arithmetic_arranger(["1500 +50", "320-5", "7-6"])
 print(formula)
-formula2 = arithmetic_arranger("320 - 5")
-print(formula2)
+# formula2 = arithmetic_arranger(["320 - 5"])
+# print(formula2)
