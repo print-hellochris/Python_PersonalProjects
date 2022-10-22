@@ -1,74 +1,66 @@
-''' https://forum.freecodecamp.org/t/scientific-computing-with-python-projects-arithmetic-formatter/562679'''
+
 
 
 def arithmetic_arranger(self):
-
-
-    for i in self:
-#--------------------- Removes blank space before continuing--------------------------------------------------------------
-        i = i.replace(" ", "")
-#---------------------Checks if there are more than 5 problems to the function-----------------------------------------------------------------------------
-        if len(self) > 5:
-            return "Error: Too many problems"
-            break
-#---------------------checks if there's a plus operator. I am working only with the Plus operator for now to see if I can get the problems displayed correctly.---------
-        elif "+" in i:
-            n = i.index("+")
-            operator = '+'
-#-------------------- Separates operand1 and operand2 based on the index of the operator------------------------------------------------------------------------------
-            num1 = (i[0:n])
-            num2 = (i[n + 1:])
-            '''
-            Checks the lengths of digits.
-            '''
-            if len(num1)>4:
-                return 'Number {0} cannot be more than four digits'.format(num1)
-                break
-            else:
-                operand_one = int(num1)            
-            if len(num2)>4:
-                return 'Number {0} cannot contain more than four digits'.format(num2)
-                break
-            else:
-                operand_two = int(num2)
-            #Creates a variable result that sums both operands. 
-            result = operand_one+operand_two
-        elif "-" in i:
-            n = i.index("-")
-            operator = '-'
-#-------------------- Separates operand1 and operand2 based on the index of the operator------------------------------------------------------------------------------
-            num1 = (i[0:n])
-            num2 = (i[n + 1:])
-                      
-            if len(num1)>4:
-                return 'Number {0} cannot be more than four digits'.format(num1)
-                break
-            else:
-                operand_one = int(num1)            
-            if len(num2)>4:
-                return 'Number {0} cannot contain more than four digits'.format(num2)
-                break
-            else:
-                operand_two = int(num2)
-                #Creates a variable result that sums both operands. 
-                result = operand_one-operand_two
-        else:         
+    if len(self)>5:
+        return 'Error: Too many problems'        
+    else:
+        for each_index in self:
+            if '+' in each_index:
+                operator = '+'
+            elif '-' in each_index:
+                operator = '-'
+            else: 
+                return 'Error: Operator must either be + or -'
             
-            return "Error:Operator in {0} must be either '+' or '-' .format(i)"
-            break
-        
-        
-        if len(num2) > len(num1):
-            
-            left_margin = ' '*len(num2)
+            n = each_index.index(operator)
+            operand_one = each_index[0:n]
+            operand_two = each_index[n+1:]
+            combinedoperands = operand_one+operand_two
+            num1 = int(operand_one)
+            num2 = int(operand_two)
 
-        line_One = left_margin + num1
-        output = '{line_One}\n{line_Two}\n{dashLine}\n{line_Three}'.format(line_One=line_One,line_Two=line_Two,dashLine=dashLine,line_Three=line_Three)
-        return result
-    #I added this empty string because the function kept returning None.
-    
-    
-formula = arithmetic_arranger(['1+2'])
-print(formula)
-# formula2 = arithmetic_arranger(["320 - 5"])
-# print(formula2)
+            if combinedoperands.isdigit() == False:
+                return ' Numbers must only contain digits'
+                break
+            if len(operand_one) >4:
+                return 'Numbers cannot be more than four digits'
+                break
+            elif len(operand_two)>4:
+                return 'Numbers cannot be more than four digits'
+                break
+            
+            if operator =='+':
+                addition = num1+num2
+                result = str(addition)
+            elif operator =='-':
+                subtraction = num1-num2
+                result(str(subtraction))
+
+            left_margin = ' '            
+            slashn = '\n'
+            whitespace =''
+            left_space =''
+
+            if len(operand_one) > len(operand_two):
+                difference = len(operand_one)-len(operand_two)
+                whitespace = ' '*difference
+
+            elif len(operand_one) < len(operand_two):
+                difference = len(operand_two)-len(operand_one)
+                left_space = ' '*difference
+            
+            line_one = left_margin+left_space+operand_one
+            line_two = slashn+operator+whitespace+operand_two
+            dashes = '_'*len(line_two)
+            line_three = slashn+dashes
+            line_four= slashn+left_margin+result
+           
+            output = '{0}{1}{2}{3}'.format(line_one,line_two,line_three,line_four)
+            
+            return output        
+     
+    return ' '
+
+
+print(arithmetic_arranger(['600+3000', '30+7', '800-400']))
