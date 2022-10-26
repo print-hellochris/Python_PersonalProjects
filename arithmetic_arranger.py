@@ -52,10 +52,11 @@ def arithmetic_arranger(self):
 #-------Assigning variables that will compose the display of the problem.            
 
         left_margin = ' '            
-        slashn = '\n'
+        # slashn = '\n'
         whitespace =''
         left_space =''
         margin = ' '
+        space = ' '
 #------If/else block to adjust the formating of the output depending on the length of the smaller operand.
         if len(operand_one) > len(operand_two):
             difference = len(operand_one)-len(operand_two)
@@ -68,35 +69,41 @@ def arithmetic_arranger(self):
             margin = ''
  #------Assigning variables to compose the output (display of the problem)       
         separator='    '
-        line_one = left_margin+left_space+operand_one+separator
-        line_two = operator+whitespace+operand_two
+        line_one = space+left_margin+left_space+operand_one
+        line_two = operator+space+whitespace+operand_two
         dashes = '_'*len(line_two)
-        line_three = dashes+separator
-        line_four= margin+result+separator
+        line_three = dashes
+        line_four= space+margin+result
         
         
-#------Here is where I come up with the second issue, regarding the return/print function            
-        # output = '{0}{1}{2}{3}'.format(line_one,line_two,line_three,line_four)
-        output =line_one+line_two+line_three+line_four
+
        
         row_one.append(line_one)
+        row_one.append(separator)
         
         row_two.append(line_two)
         row_two.append(separator)
         
         row_three.append(line_three)
+        row_three.append(separator)
         
-
         row_four.append(line_four)
+        row_four.append(separator)
+
         rows_combined = row_one+new_line+row_two+new_line+row_three+new_line+row_four
         
-        display = ''.join(rows_combined)
-
+        
+        rows_combined.pop()
+       
+        display = ''.join(rows_combined)     
+        display = display.replace('    \n','\n')  
+                       
 
         # print(line_one,type(line_one))
        
-    return display
     
+    
+    return display 
         
         
 
@@ -105,4 +112,4 @@ def arithmetic_arranger(self):
     # return 'output'
     
 
-print(arithmetic_arranger(['6666+6000', '3000+7', '8000-4000']))
+print(arithmetic_arranger(["32 + 8", "2 - 3801", "9999 + 9999", "523 - 49"]))
