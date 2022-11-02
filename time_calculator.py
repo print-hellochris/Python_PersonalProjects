@@ -1,22 +1,14 @@
-#Pensar em uma forma de guardar AM e PM
-#Pensar em uma forma de guardar os dias da semana
-#Pensar em uma forma de deixar a var day period em caixa alta.
-
 def add_time(start_time,duration_time,week_day=''):
 
-
-    days_of_the_week= ['Sunday', 'Monday',' Tuesday','Wednesday','Thursday','Friday','Saturday']
+#---Declaring list of days of the week
+    days_of_the_week= ['Sunday', 'Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     
-#---Preparing the strings for parsing
-
-    
-    
+#---Preparing the strings for parsing    
     week_day = week_day.capitalize()    
-    if week_day in days_of_the_week:
-        starting_point = days_of_the_week.index(week_day)
     start_time = start_time.replace(' ','')
     duration_time=duration_time.replace(' ','')
     day_period = ''
+
 #---Variable to detect the colons and time period
     colon_index = start_time.index(':')
     period_index = start_time.index('M')    
@@ -39,6 +31,7 @@ def add_time(start_time,duration_time,week_day=''):
     minute_output =''
     period_output =''
     whitespace = ' '
+
 #---Creates a variable total hour and total minute
     total_time = int(start_hour) + int(duration_hour) + int(hours_from_minutes)
     total_minute = int(start_minute) + int(duration_minute) +int(total_minute_module)
@@ -47,6 +40,29 @@ def add_time(start_time,duration_time,week_day=''):
     how_many_periods = total_time/12
     how_many_periods_module = how_many_periods%12
     is_it_odd_or_even = how_many_periods%2    
+
+#---Assigns variables for the dinal display    
+    hour_display = str(hour_output)
+    minute_display = str(minute_output)
+    days_display =''
+    weekday_display=''
+    final_point =''
+    time_display = ''
+#---If the duration time equals 24, then the function will return the same time and show it ends the following day
+    if duration_time =='24:00' and week_day in days_of_the_week:        
+        starting_point = days_of_the_week.index(week_day)
+        final_point = starting_point+1
+        if final_point > len(days_of_the_week):
+            weekday_display = days_of_the_week[0+(final_point%7)]
+        else:
+            weekday_display = days_of_the_week[0+(final_point%7)]
+               
+        time_display = '{0}:{1} {2}, {3} (next day)'.format(start_hour, start_minute, day_period, weekday_display)
+        return time_display
+
+    if duration_time == '24:00':
+        time_display = '{0}:{1} {2} (next day)'.format(start_hour, start_minute, day_period)        
+        return time_display 
 
 #---How many hours does the minutes have?
     if total_minute >59:
@@ -64,10 +80,11 @@ def add_time(start_time,duration_time,week_day=''):
         hour_output = int(total_time)
 
 # #---In what period of the day does the task finish?
-    if how_many_periods == 0:
-        day_period = period_output
+    how_many_periods = int(how_many_periods)
+    if how_many_periods == 0:        
+        period_output = day_period
     if how_many_periods/2 ==0:
-        day_period = period_output
+        day_period = period_output   
     elif how_many_periods/2 != 0:
         if day_period == 'AM':
             period_output = 'PM'            
@@ -78,71 +95,56 @@ def add_time(start_time,duration_time,week_day=''):
 #---Makes the Hour lesser than 12 on output    
     while hour_output> 12:        
         hour_output = hour_output - 12
+    if hour_output == 12:
+        if day_period == 'PM':
+            period_output = 'AM'
+        elif day_period =='AM':
+            period_output ='PM'
 
 #---Assigns variables for the dinal display    
     hour_display = str(hour_output)
     minute_display = str(minute_output)
     days_display =''
-    weekday_display='não funcionou ainda'
-
+    weekday_display=''
+    final_point =''
+    time_display = ''
+    days = int(days)
 #---Makes the minutes less than 59 on output
     if minute_output < 9:
         minute_display = '0'+minute_display
-# How many days later?
+#---How many days later?
     if days == 0:
         days_display = ''
     if days ==1:
-        days_display = '(next day)'       
+        days_display = ' (next day)'       
 
     elif days >1:
-        days_display = '({0} days later)'.format(int(days))
-#What day of the week?
-     
-    if week_day in days_of_the_week and days< 1:
-        print('something')
-        weekday_display = week_day
-    elif week_day in days_of_the_week and days >1:
-        print('now this')
-        starting_point = days_of_the_week.index(week_day)
-        # z = int(days) -1
-        # a= range(starting_point, z,int(days))
-        # weekday_display = days_of_the_week[z]
-        time_display = hour_display+':'+minute_display+whitespace+period_output+whitespace+weekday_display+days_display
+        days_display = ' ({0} days later)'.format(int(days))
+
+#----What day of the week?   
+    if week_day in days_of_the_week:
+        if int(days) < 1:
+            weekday_display = week_day
+            time_display = hour_display+':'+minute_display+whitespace+period_output+','+whitespace+weekday_display+days_display
+        elif int(days) >= 1:
+            difference = int(days)%7
+            starting_point = days_of_the_week.index(week_day)
+            final_point = starting_point + difference
+            # weekday_display = days_of_the_week[final_point]
+            if final_point > len(days_of_the_week):
+                weekday_display = days_of_the_week[0+(final_point%7)]
+            else:
+                weekday_display = days_of_the_week[0+(final_point%7)]
+            
+            time_display = hour_display+':'+minute_display+whitespace+period_output+','+whitespace+weekday_display+days_display
     else: 
-        time_display = hour_display+':'+minute_display+whitespace+period_output+whitespace+days_display
+        time_display ='{}:{} {}{}'.format(hour_display,minute_display,period_output,days_display)
+        # time_display = hour_display+':'+minute_display+whitespace+period_output+whitespace+days_display
+        return time_display
     
-    return week_day,weekday_display, days, starting_point
+    return time_display
         
 
+print(add_time("8:16 PM", "466:02", "tuesday")) #to return "6:18 AM, Monday (20 days later
 
-          
-#---Template for the return value 
-    
-
-    
-    
-
-    return weekday_display
-# return time_display
-    # return time_display
-
-
-
-print(add_time('3:00AM', '23:10', 'Monday')) # Time Display OK / PERIOD OK / DAY OK
-print('=======================') 
-# print(add_time("11:30AM", "2:32"))#Time Display  OK / PERIOD OK / DAY OK
-# print('===========================')
-# print(add_time("11:43AM", "00:20")) # Time Display OK / PERIOD OK / DAY OK
-# print('============================')
-# print(add_time("10:10PM", "3:30")) # Time Display OK / PERIOD OK / SHOULD SHOW NEXT DAY
-# print('============================')
-# print(add_time("11:43PM", "24:20")) #Time Display OK / PERIOD OK / SHOULD BE 2 DAYS LATER
-# print('==============================')
-# print(add_time("6:30PM", "205:12")) # Time Display OK / PERIOD NOT OK / SHOULD BE 9 DAYS LATER
-
-
-
-
-
-
-
+print(add_time("11:59 PM", "24:05", "Wednesday")) # to return "12:04 AM, Friday (2 days later)"')
