@@ -15,7 +15,7 @@ Esta função foi feita como parte dos desafios do curso Ciência da Computaçã
 This function is the second of the five challenges in the Freecodecamp scientific computing with python projects. This function accepts three parameters: a staring time, duration time and an optional, day of the week. The function returns the ending time and how n days after. If the optional parameter is True, then the function also returns the day of the week.  
 
 
-Esta função foi feita como parte dos desafios do curso Ciência da Computação com Python, do Freecodecamp. Esta função aceita três parânetros: hora de início, tempo de duração e um parâmetro opcional (dia da semana). A função retorna a hora final e os n dias depois. Se o parâmetro opcional for usado, a função também retorna o dia da semana em que a tarefa termina. 
+Esta função foi feita como parte dos desafios do curso Ciência da Computação com Python, do Freecodecamp. Esta função aceita três parâmetros: hora de início, tempo de duração e um parâmetro opcional (dia da semana). A função retorna a hora final e os n dias depois. Se o parâmetro opcional for usado, a função também retorna o dia da semana em que a tarefa termina. 
 
 
 ## Name generator
