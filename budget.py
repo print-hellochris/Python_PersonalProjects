@@ -130,12 +130,10 @@ def create_spend_chart(category):
         zero_line_dashes = margin+'-' *((length_category*2)+2)
     output = title+'\n'+display+'\n'+zero_line_dashes
 
-#___Now for the 'fun' part
+#___Now for the 'fun' part. I stopped here
     for words in category:
-        i = 0
-       
+        i = 0     
      
-        
     return output
 
 
