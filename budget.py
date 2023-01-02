@@ -1,11 +1,10 @@
-class category:
+class Category:
     def __init__(self,name):
         self.name = name
         self.ledger = []  
         self.amounts =[]
         self.deposits=[]
         self.withdrawals=[]
-            
         
     def __str__(self): 
 
@@ -132,15 +131,15 @@ def create_spend_chart(category):
 
 #___Now for the 'fun' part. I stopped here
     for words in category:
-        i = 0     
+        list
      
     return output
 
 
-Food = category('Food')
-Money = category('Money')
-dip =category('Dip')
-Do = category('Do')
+Food = Category('Food')
+Money = Category('Money')
+dip =Category('Dip')
+Do = Category('Do')
 print(Food.deposit(900,'Salário'))
 print(Food.withdraw(200,'Compras semanais'))
 print(Food.deposit(50, 'Groceries'))
