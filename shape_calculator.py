@@ -1,67 +1,66 @@
-'''
-
-eif an instance of a Rectangle is represented as a string, it should look like: Rectangle(width=5, height=10)
-
-
-'''
-
 class Rectangle: 
     def __init__(self, width, height):
         
         self.width = width
         self.height = height
+
     def __str__(self):
         return f'Rectangle(width={self.width},height={self.height})'
+
     def set_width(self,new_width):
-        pass
+        self.width = new_width       
     
     def set_height(self,new_height):
-        pass
-
+        self.height = new_height        
 
     def get_area(self):
         return self.width * self.height
     
     def get_perimeter(self):
         return ((2*self.width) + (2*self.height))
+
     def get_diagonal(self): #Posso arredondar o resultado
-        return (((self.width ** 2) + (self.height ** 2)) ** .5)
+        diagonal = (((self.width ** 2) + (self.height ** 2)) ** .5)
+        round(diagonal,2)
+        return diagonal
     def get_picture(self):
-        
-        output = ''
-        line=''
-        # line = '*' * self.width
-        # line += '\n'
-        line_list = []
-        line_list = list(line)
-        for i in range(self.width):  
-            
-            line +='*'
-        
-        line +='\n'
-
+        output=''        
+        if ((self.width) or (self.height)) > 50:
+            return 'Too big for picture' 
+        for each_step_height in range(self.height):
+            for each_step_width in range(self.width):
+                output +='*'
+            output +='\n'
+        return output 
        
-            
-        # return output = ''.join(line_list)
-
- 
-        # for i in range(self.width):
-        #     output +='*'
-        # for i in range(self.height):
-        #     output += '*'
-        # output+='\n'
-        
-        return output
-       
-    # def get_amount_inside(self):
+    def get_amount_inside(shape):
+        area = self.get_area()
+        arg_area = shape.get_area()
+        how_many_shapes_inside = area / arg_area
+        return how_many_shapes_inside
+        #How many times can the shape in the argument fit the main shape? 
     #     pass
 
-# class Square (Rectangle(width, height)):
-#     pass
+class Square (Rectangle):
+    def __init__(self, side):
+        self.side = side
+        Rectangle.width = side
+        Rectangle.height =side
 
-a = Rectangle(width=5, height=4)
-print(a)
-# print(a.get_area())
-# print(a.get_perimeter())
-# print(a.get_diagonal())
-print(a.get_picture())
+    def __str__(self):
+        return f'Square(side={self.side})'
+    def set_side(self,new_side):
+        self.side = new_side
+
+    def set_width(self,new_width):
+        self.width = side      
+    
+    def set_height(self,new_height):
+        self.height = side 
+
+
+sq = Square(2)
+print(sq)
+
+sq.width(4)
+print(sq)

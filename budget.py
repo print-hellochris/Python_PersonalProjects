@@ -115,8 +115,12 @@ def create_spend_chart(category):
     for items in category:
         withdrawal = sum(items.withdrawals)
         deposits = sum(items.deposits)
+        expenses = []
+        expenses.append(withdrawal)
+        all_expenses = int(sum(expenses))
         percentage_spent = (withdrawal * 100) / deposits
-
+        # how_many_os = percentage_spent / 10  
+        # percentage_spent = (withdrawal * 100) / deposits
         how_many_os = percentage_spent / 10  
         for i in range(index, int(how_many_os)):
             lista[i] = lista[i]+' o'        
@@ -134,6 +138,27 @@ def create_spend_chart(category):
         list
      
     return output
+
+
+
+# food = Category("Food")
+# food.deposit(1000, "initial deposit")
+# food.withdraw(10.15, "groceries")
+# food.withdraw(15.89, "restaurant and more food for dessert")
+
+# clothing = Category("Clothing")
+# food.transfer(50, clothing)
+# clothing.withdraw(25.55)
+# clothing.withdraw(100)
+# auto = Category("Auto")
+# auto.deposit(1000, "initial deposit")
+# auto.withdraw(15)
+
+# print(food)
+# print(clothing)
+# print(auto)
+
+# print(create_spend_chart([food, clothing, auto]))
 
 
 Food = Category('Food')
