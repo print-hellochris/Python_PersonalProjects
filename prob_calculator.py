@@ -56,43 +56,64 @@ class Hat:
 
 def experiment(hat, num_balls_drawn, num_experiments, expected_balls):
     # def experiment (hat=None,num_balls_drawn=None,num_experiments=None,expected_balls=None):
-    event = 0
-    total_trials = 0
-    draws = []
-    sum_expected_values = sum(expected_balls.values())
-    sucess = True
-    failure = False
+    for experiment in range(num_experiments):
+        draw_balls = hat.draw(num_balls=num_balls_drawn)
+        balls_value = 0
+        correct_check = 0
 
-    for trials in range(num_experiments):
+        for balls in draw_balls:
+            balls_value = draw_balls.count(balls)
+            for expected_ball, expected_value in expected_balls.items():
+                if balls == expected_ball:
+                    if balls_value >= expected_value:
+                        correct_check += 1
+            #             print(
+            #                 f"balls={balls}/ value drawn = {balls_value} and expected ball = {expected_ball}/ expected value = {expected_value}"
+            #             )
+            # print(draw_balls)
+    print(draw_balls)
+    return correct_check / num_experiments
 
-        draws = hat.draw(num_balls=num_balls_drawn)
-        copy_hat = draws.copy()
 
-        for keys in copy_hat:
-            values = copy_hat.count(keys)
-            for expected_keys, expected_values in expected_balls.items():
+# def experiment(hat, num_balls_drawn, num_experiments, expected_balls):
+#     # def experiment (hat=None,num_balls_drawn=None,num_experiments=None,expected_balls=None):
+#     event = 0
+#     total_trials = 0
+#     draws = []
+#     sum_expected_values = sum(expected_balls.values())
+#     sucess = True
+#     failure = False
 
-                if keys == expected_keys and values >= expected_values:
-                    print(sucess)
-                    # print(f'==========SUCESS==========\nTrial number {trials}:\nKey:{keys} | Value: {values} \nExpected Key: {expected_keys} | Expected Values: {expected_values}\nTotal trials = {total_trials}\n====================\n')
-                    total_trials += 1
-                else:
-                    print(failure)
+#     for trials in range(num_experiments):
 
-                    # print(f'============FAILURE==========\nTrial number {trials}:\nKey:{keys} | Value: {values} \nExpected Key: {expected_keys} | Expected Values: {expected_values}\nTotal trials = {total_trials}\n====================\n')
-        if copy_hat == []:
-            copy_hat = hat
+#         draws = hat.draw(num_balls=num_balls_drawn)
+#         copy_hat = draws.copy()
 
-        print(trials, total_trials, sum_expected_values)
+#         for keys in copy_hat:
+#             values = copy_hat.count(keys)
+#             for expected_keys, expected_values in expected_balls.items():
 
-    # if total_trials >= sum_expected_values:
-    #   event += 1
-    #   total_trials = 0
+#                 if keys == expected_keys and values >= expected_values:
+#                     print(sucess)
+#                     # print(f'==========SUCESS==========\nTrial number {trials}:\nKey:{keys} | Value: {values} \nExpected Key: {expected_keys} | Expected Values: {expected_values}\nTotal trials = {total_trials}\n====================\n')
+#                     total_trials += 1
+#                 else:
+#                     print(failure)
 
-    # else:
-    #   total_trials = 0
+#                     # print(f'============FAILURE==========\nTrial number {trials}:\nKey:{keys} | Value: {values} \nExpected Key: {expected_keys} | Expected Values: {expected_values}\nTotal trials = {total_trials}\n====================\n')
+#         if copy_hat == []:
+#             copy_hat = hat
 
-    return total_trials / num_experiments
+#         print(trials, total_trials, sum_expected_values)
+
+#     # if total_trials >= sum_expected_values:
+#     #   event += 1
+#     #   total_trials = 0
+
+#     # else:
+#     #   total_trials = 0
+
+#     return total_trials / num_experiments
 
 
 Hat = Hat(blue=3, red=2, green=6)
